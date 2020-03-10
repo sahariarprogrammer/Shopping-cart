@@ -7,21 +7,7 @@ body{
 	padding: 60px 0;
 }
 
-.head{
-	text-align:center;
-	background:gray;
-	width:880px;
-	margin-left:110px;
-	padding-right:9px;
-	border:2px solid black;
-	border-radius:15px;
-}
 
-.head h1{
-	color:white;
-	text-transform:uppercase;
-	padding:10px;
-}
 .total-price{
 	padding-bottom: 15px;
 }
