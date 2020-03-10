@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container" id="page1">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+			
+			
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+						<!-- 2 button and input box er khela for mobile -->
+						
+                           <button id="minusinputchange" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="plusinputchange" type="text" class="form-control text-center" value="0">
+                           <button id="plusbutton1" class="btn btn-default"><i class="fas fa-plus"></i></button>
+						   
+						   
+                        </div>
+                        <h5>$<span id="moneyamount">00</span></h5>
+                        <img src="images/b.jpg" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+						
+						
+                           <button id="minusinputchange2" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="plusinputchange2"type="text" class="form-control text-center" value="0">
+                           <button id="plusbuttoncover"class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$<span id="moneyamount2" >00</span></h5>
+                        <img src="images/b.jpg" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5 >$<span id="subtotal">00</span></h5>
+                        <h5>$<span id="tax">00</span></h5>
+                        <h5>$<span id="Total">00</span></h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button id="check" type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+	  
+	 
+	  <div id="page2id" class="page2">
+		<h1>Thank you very much Sir</h1>
+		<h4>Orders Accepted</h4>
+		<h6>your orders will be delivered within 10 days</h6>
+	  
+	  </div>
+	  
+	 
+   </section>
+   
+   
+   
+   
+   
+   <script>
+  // first er tar plus minus handelling 
+	   // plus button handeling
+		const plusBtn=document.getElementById("plusbutton1");
+		plusBtn.addEventListener("click",function(){
+		
+		const plusfinal=plusoneinbox("plusinputchange");
+		const plusfinalfinal= plusdone(plusfinal);
+		document.getElementById("plusinputchange").value=plusfinalfinal;
+		const moneyAmountNumberUpdatefinal=moneycalplus("moneyamount")
+		document.getElementById("moneyamount").innerText=moneyAmountNumberUpdatefinal;
+		
+		// subtotal plus1
+		const subTotal=document.getElementById("subtotal").innerText;
+	   const subTotalnmbr=parseFloat(subTotal);
+	   const subTotalnmbrcal=subTotalnmbr+1219;
+	   document.getElementById("subtotal").innerText=subTotalnmbrcal;
+	   
+	   // tax calculation
+	   const tax1=taxcalculation("tax",subTotalnmbrcal);
+	   document.getElementById("tax").innerText=tax1; 
+	   
+	   // total calculation
+	   const total1=totalcalculation("Total",subTotalnmbrcal,tax1);
+	   document.getElementById("Total").innerText=total1;
+	  
+		
+		})
+		
+		
+		
+		// minus button handeling
+		const minusBtn=document.getElementById("minusinputchange");
+	   minusBtn.addEventListener("click",function(){
+	   
+	  const minusinitial= plusoneinbox("plusinputchange");
+	  const minusfinal=minusdone(minusinitial);
+	 document.getElementById("plusinputchange").value=minusfinal;
+	  const moneyanotherupdate=moneycalminus("moneyamount")
+	  document.getElementById("moneyamount").innerText=moneyanotherupdate;
+	   
+	   // subtotal mius1
+		const subTotalminus=document.getElementById("subtotal").innerText;
+	   const subTotalnmbrminus=parseFloat(subTotalminus);
+	   const subTotalnmbrcalminus=subTotalnmbrminus-1219;
+	   document.getElementById("subtotal").innerText=subTotalnmbrcalminus;
+	   
+	   
+	   // tax calculation
+	   
+	    const tax2=taxcalculation("tax",subTotalnmbrcalminus); 
+       document.getElementById("tax").innerText=tax2;
+	 
+	  // total calculation
+	   const total2=totalcalculation("Total",subTotalnmbrcalminus,tax2);
+	   document.getElementById("Total").innerText=total2;
+	   
+	   })
+	   
+	   
+	   
+    // second er tar plus minus handelling 
+	   // plus button handeling
+		const plusBtn2=document.getElementById("plusbuttoncover");
+		plusBtn2.addEventListener("click",function(){
+		
+		const plusfinal2=plusoneinbox("plusinputchange2");
+		const plusfinalfinal2= plusdone(plusfinal2);
+		document.getElementById("plusinputchange2").value=plusfinalfinal2;
+		
+		const moneyAmountNumberUpdatefinal2=moneycalplus2("moneyamount2")
+		document.getElementById("moneyamount2").innerText=moneyAmountNumberUpdatefinal2;
+		
+		
+		// subtotal plus2
+		const subTotal2=document.getElementById("subtotal").innerText;
+	   const subTotalnmbr2=parseFloat(subTotal2);
+	   const subTotalnmbrcal2=subTotalnmbr2+59;
+	   document.getElementById("subtotal").innerText=subTotalnmbrcal2;
+	   
+	   //tax calculation
+	   const tax3=taxcalculation("tax",subTotalnmbrcal2);
+	   document.getElementById("tax").innerText=tax3; 
+	   
+	    // total calculation
+	   const total3=totalcalculation("Total",subTotalnmbrcal2,tax3);
+	   document.getElementById("Total").innerText=total3;
+		
+		})
+		
+		// minus button handeling
+		const minusBtn2=document.getElementById("minusinputchange2");
+	   minusBtn2.addEventListener("click",function(){
+	   
+	  const minusinitial2= plusoneinbox("plusinputchange2");
+	  const minusfinal2=minusdone(minusinitial2);
+	 document.getElementById("plusinputchange2").value=minusfinal2;
+	  
+	   const moneyanotherupdate2=moneycalminus2("moneyamount2")
+	  document.getElementById("moneyamount2").innerText=moneyanotherupdate2;
+	  
+	  
+	  // subtotal mius2
+		const subTotalminus2=document.getElementById("subtotal").innerText;
+	   const subTotalnmbrminus2=parseFloat(subTotalminus2);
+	   const subTotalnmbrcalminus2=subTotalnmbrminus2-59;
+	   document.getElementById("subtotal").innerText=subTotalnmbrcalminus2;
+	   
+	   
+	   // tax calculation
+	   
+	    const tax4=taxcalculation("tax",subTotalnmbrcalminus2); 
+       document.getElementById("tax").innerText=tax4;
+	   
+	   
+	    // total calculation
+	   const total4=totalcalculation("Total",subTotalnmbrcalminus2,tax4);
+	   document.getElementById("Total").innerText=total4;
+		
+	
+	   
+	   })
+	   
+	   
+	   
+	   
+ // check out khela
+ 
+	const check1=document.getElementById("check");
+	check1.addEventListener("click",function(){
+	const Page1=document.getElementById("page1");
+	Page1.style.display="none";
+	const Page2=document.getElementById("page2id");
+	Page2.style.display="block";
+	
+	
+	})
+   
+   
+   
+   
+   function plusoneinbox(id){
+   const plsBtninptchng=document.getElementById(id).value;
+	const plsBtninptchngNumbr=parseFloat(plsBtninptchng);
+	return plsBtninptchngNumbr;
+	
+	
+	}
+	
+	
+   
+   function plusdone (number){
+   const plsBtninptchngNumbrUpdate=number+1;
+   return plsBtninptchngNumbrUpdate;
+   }
+   
+   
+   function minusdone (number){
+   const plsBtninptchngNumbrUpdate=number-1;
+   return plsBtninptchngNumbrUpdate;
+   }
+   
+   function moneycalplus(id){
+   const moneyAmount=document.getElementById(id).innerText;
+		const moneyAmountNumber=parseFloat(moneyAmount);
+		const moneyAmountNumberUpdate=moneyAmountNumber+1219;
+		return moneyAmountNumberUpdate;
+   
+   }
+    function moneycalplus2(id){
+   const moneyAmount=document.getElementById(id).innerText;
+		const moneyAmountNumber=parseFloat(moneyAmount);
+		const moneyAmountNumberUpdate=moneyAmountNumber+59;
+		return moneyAmountNumberUpdate;
+   
+   }
+   
+   function moneycalminus(id){
+   const moneyAmount=document.getElementById(id).innerText;
+		const moneyAmountNumber=parseFloat(moneyAmount);
+		const moneyAmountNumberUpdate=moneyAmountNumber-1219;
+		return moneyAmountNumberUpdate;
+   
+   }
+    function moneycalminus2(id){
+   const moneyAmount=document.getElementById(id).innerText;
+		const moneyAmountNumber=parseFloat(moneyAmount);
+		const moneyAmountNumberUpdate=moneyAmountNumber-59;
+		return moneyAmountNumberUpdate;
+   
+   }
+   
+   
+   function taxcalculation(id,varrnumber){
+	const taxamount=document.getElementById(id).innerText;
+   const taxamountnmbr=parseFloat(taxamount);
+   const taxamountcal=(varrnumber*.05);
+   return taxamountcal;
+   
+   }
+   
+   function totalcalculation(id,variablenmbr1,variablenmbr2){
+   const totalfinal1=document.getElementById(id).innerText;
+   const totalfinal1nmbr=parseFloat(totalfinal1);
+   const totalfinal1nmbrcal=variablenmbr1 + variablenmbr2;
+   return totalfinal1nmbrcal;
+   
+   }
+   
+   </script>
+   
+</body>
+
+</html>
